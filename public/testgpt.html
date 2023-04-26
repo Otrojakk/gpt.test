@@ -62,11 +62,17 @@ margin-top: 20px;
 </form>
 
 <script>
-document.getElementById('queryForm').addEventListener('submit', async (e) => {
-e.preventDefault();
-const inputField = document.getElementById('inputField');
-const response = document.getElementById('response');
-const data = JSON.stringify({ input: inputField.value });
-
-try {
-const result = await fetch('/undefined
+document.getElementById('myForm').addEventListener('submit', async (event) => {
+event.preventDefault();
+const input = document.getElementById('input').value;
+const response = await fetch('/api/request', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ input: input }),
+});
+const data = await response.text();
+document.getElementById('result').innerHTML = data;
+});
+</script>
+</body>
+</html>
